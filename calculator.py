@@ -8,7 +8,7 @@ ctypes.windll.shcore.SetProcessDpiAwareness(2)
 class Calculator:
     def __init__(self, calc_window):
         self.calc_window = calc_window
-        self.calc_window.title('Калькулятор')
+        self.calc_window.title('Calculator v2')
         self.calc_window.geometry('700x730')
         self.calc_window.resizable(False, False)
         self.result = '0'
