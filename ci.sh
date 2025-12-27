@@ -17,6 +17,7 @@ echo "3. Выполнение unittest..."
 python -m pytest test_calculator.py -v || echo "Тесты не прошли, но продолжаем..."
 
 echo "4. Создание установщика (Windows SETUP)..."
+rm -rf ../calculator-setup 2>/dev/null || true
 mkdir -p ../calculator-setup
 cp calculator.py test_calculator.py ../calculator-setup/
 cat > ../calculator-setup/install.bat << 'BAT'
@@ -29,10 +30,15 @@ echo Готово! Калькулятор установлен в %%ProgramFiles
 pause
 BAT
 cd ..
-zip -r calculator-setup.zip calculator-setup/
-echo "SETUP-архив создан: calculator-setup.zip"
+tar czf calculator-setup.tar.gz calculator-setup/
+echo "SETUP-архив создан: calculator-setup.tar.gz"
+cd calculator
 
-echo "5. Установка приложения (симуляция)..."
-echo "   (Для установки запустите install.bat из архива calculator-setup.zip)"
+echo "5. Установка приложения (реальная, в домашнюю папку)..."
+INSTALL_DIR="$HOME/calculator-app"
+mkdir -p "$INSTALL_DIR"
+cp calculator.py test_calculator.py "$INSTALL_DIR/"
+echo "✅ Калькулятор установлен в $INSTALL_DIR"
+echo "Запуск: python $INSTALL_DIR/calculator.py"
 
 echo "✅ CI-скрипт завершил работу."
