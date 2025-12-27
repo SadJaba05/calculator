@@ -108,3 +108,9 @@ if __name__ == '__main__':
     main_window = tk.Tk()
     Calculator(main_window)
     main_window.mainloop()
+
+    memory = 0
+    def memory_add(self):
+        self.memory = float(self.result)
+    def memory_recall(self):
+        self.result = str(self.memory)
